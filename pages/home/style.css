@@ -1,0 +1,86 @@
+/* Main document styling */
+html {
+    font-family: times-new-roman;
+    background: linear-gradient(
+        to right,
+        rgb(20, 0, 130),
+        rgb(50, 0, 150) 50%,
+        rgb(70, 0, 200) 75%
+    );
+}
+body {
+    color: white;
+    background-color: transparent !important
+}
+
+/* Navbar */
+#navbar {
+    display: flex;
+    align-items: center;
+    min-height: 65px;
+    padding: 0 16px;
+    z-index: 1000;
+    background: rgba(100, 100, 100, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Searchbar */
+#searchbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 25%;
+    max-width: 25%;
+    margin-left: auto;
+    margin-right: 0;
+    margin: 0;
+}
+
+/* Search input */
+#searchbar input {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+    height: 38px;
+    box-sizing: border-box;
+}
+
+/* Search button */
+#searchbar button {
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Drawer content */
+.drawer-body {
+    display: flex;
+    align-items: right;
+}
+#carousel {
+    position: absolute;
+    top: 6.5%;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+/* Carousel slides */
+#carousel .carousel-inner,
+#carousel .carousel-item {
+    height: 100%;
+}
+
+/* Carousel images */
+#carousel .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
