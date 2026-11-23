@@ -48,6 +48,10 @@
                             <div class="menu">
                                 <?php if ($isLoggedIn): ?>
                                     <span class="menu-item disabled"><?php echo htmlspecialchars($userEmail); ?></span>
+                                    <a class="menu-item" href="../account/dashboard.php">Dashboard</a>
+                                    <?php if (($_SESSION['user']['role'] ?? '') === 'admin'): ?>
+                                        <a class="menu-item" href="../admin/admin.php">Admin</a>
+                                    <?php endif; ?>
                                     <hr class="menu-divider">
                                     <a class="menu-item" href="../logout/logout.php">Logout</a>
                                 <?php else: ?>

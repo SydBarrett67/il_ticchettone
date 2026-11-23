@@ -49,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // 4. Create new user with hashed password
             $newUser = [
-                'id' => $maxId + 1,
+                'id' => $nextId,
                 'email' => $email,
-                'password_hash' => password_hash($password, PASSWORD_DEFAULT)
+                'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+                'auth_level' => '0',
             ];
-
             $users[] = $newUser;
 
             // 5. Save to JSON with LOCK_EX

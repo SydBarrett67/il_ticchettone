@@ -1,0 +1,48 @@
+.cart-panel {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #1a1a24;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.stage-bar {
+    background: #1a1a24;
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+}
+
+.cart-seat-map {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+    gap: 8px;
+}
+
+.map-cell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 4px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.map-free {
+    background-color: #e8eefc;
+    color: #140082;
+}
+
+.map-chosen {
+    background-color: #198754;
+    color: #ffffff;
+}
+
+.map-taken {
+    background-color: #dee2e6;
+    color: #6c757d;
+    opacity: 0.7;
+}

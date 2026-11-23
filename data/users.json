@@ -1,12 +1,8 @@
 [
     {
-        "id": 1,
+        "id": null,
         "email": "ale.diluca08@gmail.com",
-        "password_hash": "$2y$10$vnaIjM5gsbiuD3iKVZhj5O9TRzsQvf3NTHni5Y4X6qm0n.bQvxVTa"
-    },
-    {
-        "id": 2,
-        "email": "foo@bar.com",
-        "password_hash": "$2y$10$o0Wu3GfUcJfe13\/HO\/mpxuMMwiQE0ggtgesmPxSHPD.E0RACp4hQ2"
+        "password_hash": "$2y$10$zcB3N0y9D15lfdbpY8IEsOiKVfe6bwkpYPWfPora2L8CG4jTmvLDm",
+        "auth_level": "1"
     }
 ]

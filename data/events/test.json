@@ -1,10 +1,111 @@
 {
-  "id": 1,
-  "slug": "test-event",
-  "title": "Concerto di Prova",
-  "date": "2026-12-20 21:00",
-  "venue": "Teatro Centrale",
-  "price": 25.00,
-  "image": "fightclub.jpg",
-  "seats": []
+    "id": 1,
+    "slug": "test-event",
+    "title": "Concerto di Prova",
+    "date": "2026-12-20 21:00",
+    "venue": "Teatro Centrale",
+    "price": 25,
+    "image": "fightclub.jpg",
+    "seats": [
+        {
+            "id": "A1",
+            "status": "booked",
+            "booked_by": "ale.diluca08@gmail.com",
+            "booked_at": "2026-11-23 21:08:36"
+        },
+        {
+            "id": "A2",
+            "status": "available"
+        },
+        {
+            "id": "A3",
+            "status": "booked",
+            "booked_by": "ale.diluca08@gmail.com",
+            "booked_at": "2026-11-23 21:08:36"
+        },
+        {
+            "id": "A4",
+            "status": "available"
+        },
+        {
+            "id": "A5",
+            "status": "available"
+        },
+        {
+            "id": "A6",
+            "status": "available"
+        },
+        {
+            "id": "B1",
+            "status": "available"
+        },
+        {
+            "id": "B2",
+            "status": "available"
+        },
+        {
+            "id": "B3",
+            "status": "available"
+        },
+        {
+            "id": "B4",
+            "status": "available"
+        },
+        {
+            "id": "B5",
+            "status": "available"
+        },
+        {
+            "id": "B6",
+            "status": "available"
+        },
+        {
+            "id": "C1",
+            "status": "available"
+        },
+        {
+            "id": "C2",
+            "status": "available"
+        },
+        {
+            "id": "C3",
+            "status": "available"
+        },
+        {
+            "id": "C4",
+            "status": "available"
+        },
+        {
+            "id": "C5",
+            "status": "available"
+        },
+        {
+            "id": "C6",
+            "status": "available"
+        },
+        {
+            "id": "D1",
+            "status": "available"
+        },
+        {
+            "id": "D2",
+            "status": "available"
+        },
+        {
+            "id": "D3",
+            "status": "available"
+        },
+        {
+            "id": "D4",
+            "status": "available"
+        },
+        {
+            "id": "D5",
+            "status": "available"
+        },
+        {
+            "id": "D6",
+            "status": "available"
+        }
+    ]
 }

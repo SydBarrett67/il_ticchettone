@@ -1,0 +1,91 @@
+.event-panel {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #1a1a24;
+    border: none;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.event-hero-img {
+    height: 240px;
+    object-fit: cover;
+}
+
+.stage-bar {
+    background: #1a1a24;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.seats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+    gap: 10px;
+}
+
+.seat-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 6px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    border: 2px solid transparent;
+    transition: transform 0.12s ease, background-color 0.12s ease;
+}
+
+.seat-item input[type="checkbox"] {
+    display: none;
+}
+
+.seat-item.is-available {
+    background-color: #e8eefc;
+    color: #140082;
+    border-color: #9ab3f5;
+}
+
+.seat-item.is-available:hover {
+    transform: translateY(-2px);
+    background-color: #d6e2fb;
+}
+
+.seat-item.is-available:has(input:checked),
+.seat-item.is-in-cart {
+    background-color: #198754;
+    color: #ffffff;
+    border-color: #146c43;
+}
+
+.seat-item.is-taken {
+    background-color: #dee2e6;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.legend-box {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+}
+
+.legend-available {
+    background-color: #e8eefc;
+    border: 1px solid #9ab3f5;
+}
+
+.legend-selected {
+    background-color: #198754;
+}
+
+.legend-taken {
+    background-color: #dee2e6;
+}

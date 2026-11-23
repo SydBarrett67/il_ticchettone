@@ -1,0 +1,21 @@
+.admin-panel {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #1a1a24;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.admin-panel .text-muted {
+    color: #555566 !important;
+}
+
+.json-preview {
+    background-color: #141420;
+    color: #e8eefc;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    max-height: 320px;
+    overflow: auto;
+}

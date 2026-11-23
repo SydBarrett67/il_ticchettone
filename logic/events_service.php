@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/../backend/json_handler.php';
 
 function getEventsDirectory(): string
@@ -44,4 +45,62 @@ function filterEventsByQuery(array $events, string $query): array
             || stripos($venue, $query) !== false
             || stripos($slug, $query) !== false;
     }));
+}
+
+function getEventBySlug(string $slug): ?array
+{
+    $slug = trim($slug);
+    if ($slug === '') {
+        return null;
+    }
+
+    foreach (getAllEvents() as $event) {
+        if (($event['slug'] ?? '') === $slug) {
+            return $event;
+        }
+    }
+
+    return null;
+}
+
+function countAvailableSeats(array $event): int
+{
+    $seats = $event['seats'] ?? [];
+    if (!is_array($seats) || empty($seats)) {
+        return 0;
+    }
+
+    $available = 0;
+    foreach ($seats as $seat) {
+        if (!is_array($seat)) {
+            continue;
+        }
+        $status = (string)($seat['status'] ?? 'available');
+        if ($status === 'available' && empty($seat['booked_by'])) {
+            $available++;
+        }
+    }
+
+    return $available;
+}
+
+function getEventSeats(array $event, int $rows = 4, int $cols = 6): array
+{
+    if (!empty($event['seats']) && is_array($event['seats'])) {
+        return $event['seats'];
+    }
+
+    $seats = [];
+    $rowLetters = range('A', chr(ord('A') + max(0, $rows - 1)));
+
+    foreach ($rowLetters as $row) {
+        for ($c = 1; $c <= $cols; $c++) {
+            $seats[] = [
+                'id' => $row . $c,
+                'status' => 'available',
+            ];
+        }
+    }
+
+    return $seats;
 }
