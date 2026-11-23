@@ -75,20 +75,27 @@ img {
 
 /* Carousel */
 #carousel {
+    position: relative;
     width: 100%;
     height: 400px;
     margin-bottom: 24px;
     overflow: hidden;
 }
 
-#carousel .carousel-inner,
-#carousel .carousel-item {
+#carousel .carousel-inner {
     height: 100%;
 }
+
 #carousel .carousel-item {
+    display: none;
     height: 100%;
     transition: opacity 0.5s ease;
 }
+
+#carousel .carousel-item.active {
+    display: block;
+}
+
 #carousel .carousel-item img {
     width: 100%;
     height: 100%;
@@ -104,9 +111,27 @@ img {
     padding-bottom: 48px;
 }
 
+/* Forza 2 card per riga nella sezione eventi */
+#events-section .row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+#events-section .row > * {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+@media (max-width: 767.98px) {
+    #events-section .row {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Event cards */
 #events-section .card {
-    width: 50%;
+    width: 100%;
     background-color: rgba(50, 50, 75, 0.85);
     color: antiquewhite;
     border: none;

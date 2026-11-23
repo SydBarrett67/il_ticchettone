@@ -2,25 +2,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const carouselEl = document.getElementById("carousel");
     if (!carouselEl) return;
 
-    const items = carouselEl.querySelectorAll(".carousel-item");
-    const indicators = carouselEl.querySelectorAll(".carousel-indicators button");
+    const items = Array.from(carouselEl.querySelectorAll(".carousel-item"));
+    const indicators = Array.from(carouselEl.querySelectorAll(".carousel-indicators button"));
     if (items.length <= 1) return;
 
-    const intervalMs = Number(carouselEl.dataset.bsInterval) || 4000;
-    let currentIndex = Array.from(items).findIndex((item) => item.classList.contains("active"));
+    let currentIndex = items.findIndex((el) => el.classList.contains("active"));
     if (currentIndex < 0) currentIndex = 0;
 
-    function goToSlide(index) {
+    function showSlide(index) {
         currentIndex = (index + items.length) % items.length;
-
-        items.forEach((item, i) => {
-            item.classList.toggle("active", i === currentIndex);
+        items.forEach((item, idx) => {
+            item.classList.toggle("active", idx === currentIndex);
         });
-
-        indicators.forEach((btn, i) => {
-            const isActive = i === currentIndex;
-            btn.classList.toggle("active", isActive);
-            if (isActive) {
+        indicators.forEach((btn, idx) => {
+            const active = idx === currentIndex;
+            btn.classList.toggle("active", active);
+            if (active) {
                 btn.setAttribute("aria-current", "true");
             } else {
                 btn.removeAttribute("aria-current");
@@ -28,37 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Collega i click sugli indicatori
-    indicators.forEach((btn, i) => {
-        btn.addEventListener("click", () => {
-            goToSlide(i);
-            restartTimer();
-        });
+    indicators.forEach((btn, idx) => {
+        btn.addEventListener("click", () => showSlide(idx));
     });
 
-    let timer = null;
-
-    function startTimer() {
-        stopTimer();
-        timer = setInterval(() => {
-            goToSlide(currentIndex + 1);
-        }, intervalMs);
-    }
-
-    function stopTimer() {
-        if (timer !== null) {
-            clearInterval(timer);
-            timer = null;
-        }
-    }
-
-    function restartTimer() {
-        startTimer();
-    }
-
-    carouselEl.addEventListener("mouseenter", stopTimer);
-    carouselEl.addEventListener("mouseleave", startTimer);
-
-    goToSlide(currentIndex);
-    startTimer();
-});
+    const intervalMs = parseInt(carouselEl.dataset.bsInterval || "4000", 10);
+    setInterval(() => {
+        showSlide(currentIndex + 1);
+    }, intervalMs);
+})

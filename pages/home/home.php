@@ -3,13 +3,17 @@
 
     require_once __DIR__ . '/../../logic/events_service.php';
 
+    $carouselImages = getRandomImgs(3);
     $searchQuery = trim($_GET['q'] ?? '');
     $allEvents = getAllEvents();
-    $featuredEvents = array_slice($allEvents, 0, 3);
     $filteredEvents = filterEventsByQuery($allEvents, $searchQuery);
 
-    $isLoggedIn = isset($_SESSION['user']);
-    $userEmail = $isLoggedIn ? ($_SESSION['user']['email'] ?? '') : '';
+    $isLoggedIn = isset($_SESSION['user']) && is_array($_SESSION['user']);
+    $userEmail = $isLoggedIn ? (string)($_SESSION['user']['email'] ?? '') : '';
+    $isAdmin = $isLoggedIn && (
+        ((string)($_SESSION['user']['auth_level'] ?? '')) === '1'
+        || (($_SESSION['user']['role'] ?? '') === 'admin')
+    );
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -49,7 +53,7 @@
                                 <?php if ($isLoggedIn): ?>
                                     <span class="menu-item disabled"><?php echo htmlspecialchars($userEmail); ?></span>
                                     <a class="menu-item" href="../account/dashboard.php">Dashboard</a>
-                                    <?php if (($_SESSION['user']['role'] ?? '') === 'admin'): ?>
+                                    <?php if ($isAdmin): ?>
                                         <a class="menu-item" href="../admin/admin.php">Admin</a>
                                     <?php endif; ?>
                                     <hr class="menu-divider">
@@ -78,43 +82,26 @@
     </nav>
 
     <!-- Carousel -->
-<div id="carousel" class="carousel carousel-overlay slide" data-bs-ride="carousel" data-bs-interval="1000">        <div class="carousel-inner rounded-5">
-            <?php if (!empty($featuredEvents)): ?>
-                <?php foreach ($featuredEvents as $index => $event): ?>
-                    <?php
-                    $imgSrc = !empty($event['image'])
-                        ? '../../imgs/' . ltrim($event['image'], '/')
-                        : '../../imgs/fightclub.jpg';
-                    ?>
-                    <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                        <img src="<?php echo htmlspecialchars($imgSrc); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($event['title'] ?? 'Evento'); ?>">
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="carousel-item active">
-                    <img src="../../imgs/fightclub.jpg" class="d-block w-100" alt="Evento in evidenza">
+    <div id="carousel" class="carousel carousel-overlay slide" data-bs-ride="carousel" data-bs-interval="4000">
+        <div class="carousel-inner rounded-5">
+            <?php foreach ($carouselImages as $index => $imgSrc): ?>
+                <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                    <img src="<?php echo htmlspecialchars($imgSrc); ?>" class="d-block w-100" alt="Immagine in evidenza <?php echo $index + 1; ?>">
                 </div>
-                <div class="carousel-item">
-                    <img src="../../imgs/fightclub.jpg" class="d-block w-100" alt="Evento in evidenza">
-                </div>
-                <div class="carousel-item">
-                    <img src="../../imgs/fightclub.jpg" class="d-block w-100" alt="Evento in evidenza">
-                </div>
-            <?php endif; ?>
+            <?php endforeach; ?>
         </div>
         <div class="carousel-overlay-controls">
             <div class="carousel-indicators">
-                <?php $indicatorCount = !empty($featuredEvents) ? count($featuredEvents) : 3; ?>
-                <?php for ($i = 0; $i < $indicatorCount; $i++): ?>
+                <?php foreach ($carouselImages as $index => $_): ?>
                     <button
                         type="button"
                         data-bs-target="#carousel"
-                        data-bs-slide-to="<?php echo $i; ?>"
-                        class="<?php echo $i === 0 ? 'active' : ''; ?>"
-                        <?php echo $i === 0 ? 'aria-current="true"' : ''; ?>
-                        aria-label="Slide <?php echo $i + 1; ?>"
+                        data-bs-slide-to="<?php echo $index; ?>"
+                        class="<?php echo $index === 0 ? 'active' : ''; ?>"
+                        <?php echo $index === 0 ? 'aria-current="true"' : ''; ?>
+                        aria-label="Slide <?php echo $index + 1; ?>"
                     ></button>
-                <?php endfor; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
@@ -135,24 +122,24 @@
                 <?php foreach ($filteredEvents as $event): ?>
                     <?php
                     $eventImg = !empty($event['image'])
-                        ? '../../imgs/' . ltrim($event['image'], '/')
+                        ? '../../imgs/' . ltrim((string)$event['image'], '/')
                         : '../../imgs/fightclub.jpg';
                     ?>
-                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="col-12 col-md-6">
                         <div class="card h-100">
-                            <img src="<?php echo htmlspecialchars($eventImg); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($event['title'] ?? 'Evento'); ?>">
+                            <img src="<?php echo htmlspecialchars($eventImg); ?>" class="card-img-top" alt="<?php echo htmlspecialchars((string)($event['title'] ?? 'Evento')); ?>">
                             <div class="card-body">
-                                <h5 class="card-title"><?php echo htmlspecialchars($event['title'] ?? 'Senza titolo'); ?></h5>
+                                <h5 class="card-title"><?php echo htmlspecialchars((string)($event['title'] ?? 'Senza titolo')); ?></h5>
                                 <p class="card-text">
-                                    <?php echo htmlspecialchars($event['date'] ?? ''); ?>
+                                    <?php echo htmlspecialchars((string)($event['date'] ?? '')); ?>
                                     <?php if (!empty($event['venue'])): ?>
-                                        — <?php echo htmlspecialchars($event['venue']); ?>
+                                        — <?php echo htmlspecialchars((string)$event['venue']); ?>
                                     <?php endif; ?>
                                 </p>
                                 <?php if (isset($event['price'])): ?>
                                     <p class="card-text fw-bold">&euro; <?php echo number_format((float)$event['price'], 2, ',', '.'); ?></p>
                                 <?php endif; ?>
-                                <a href="../event/event.php?slug=<?php echo urlencode($event['slug'] ?? ''); ?>" class="btn btn-primary">Scegli posti</a>
+                                <a href="../event/event.php?slug=<?php echo urlencode((string)($event['slug'] ?? '')); ?>" class="btn btn-primary">Scegli posti</a>
                             </div>
                         </div>
                     </div>

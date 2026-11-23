@@ -14,17 +14,17 @@
             "id": "A1",
             "row": "A",
             "number": 1,
-            "status": "available",
-            "booked_by": null,
-            "booked_at": null
+            "status": "booked",
+            "booked_by": "ale.diluca08@gmail.com",
+            "booked_at": "2026-11-23 21:37:59"
         },
         {
             "id": "A2",
             "row": "A",
             "number": 2,
-            "status": "available",
-            "booked_by": null,
-            "booked_at": null
+            "status": "booked",
+            "booked_by": "ale.diluca08@gmail.com",
+            "booked_at": "2026-11-23 21:37:59"
         },
         {
             "id": "A3",

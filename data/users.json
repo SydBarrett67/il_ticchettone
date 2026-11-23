@@ -4,5 +4,12 @@
         "email": "ale.diluca08@gmail.com",
         "password_hash": "$2y$10$zcB3N0y9D15lfdbpY8IEsOiKVfe6bwkpYPWfPora2L8CG4jTmvLDm",
         "auth_level": "1"
+    },
+    {
+        "id": null,
+        "email": "matteo.maiullari@jcmaxwell.it",
+        "password_hash": "$2y$10$sZIEDR3cG2nuFBYQL.9OkeBD9NwJUI7WJfH46M7so7qQyR3RxZu52",
+        "auth_level": "1",
+        "role": "admin"
     }
 ]

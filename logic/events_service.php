@@ -104,3 +104,32 @@ function getEventSeats(array $event, int $rows = 4, int $cols = 6): array
 
     return $seats;
 }
+function getRandomImgs(int $count = 3): array
+{
+    $imgsDir = __DIR__ . '/../imgs';
+
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'avif'];
+    $files = [];
+
+    foreach (scandir($imgsDir) as $item) {
+        if ($item === '.' || $item === '..') {
+            continue;
+        }
+        $fullPath = $imgsDir . DIRECTORY_SEPARATOR . $item;
+        if (!is_file($fullPath)) {
+            continue;
+        }
+        $ext = strtolower(pathinfo($item, PATHINFO_EXTENSION));
+        if (in_array($ext, $allowedExtensions, true)) {
+            $files[] = '../../imgs/' . rawurlencode($item);
+        }
+    }
+
+    if (empty($files)) {
+        return ['../../imgs/fightclub.jpg'];
+    }
+
+    shuffle($files);
+
+    return array_slice($files, 0, max(1, $count));
+}
